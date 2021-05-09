@@ -1,23 +1,19 @@
 {
-  "name": "backend",
+  "name": "ekomz",
   "version": "1.0.0",
-  "description": "This is backend of Ekomz",
-  "main": "index.js",
+  "description": "Mern ecommerce app",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "start": "nodemon ./src/index.js"
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JoshDhar/Ekomz.git"
   },
-  "keywords": [
-    "ecommerce",
-    "mern",
-    "project",
-    "backend",
-    "api",
-    "ekomz"
-  ],
   "author": "Joshua Dhar",
   "license": "ISC",
   "bugs": {
@@ -25,13 +21,13 @@
   },
   "homepage": "https://github.com/JoshDhar/Ekomz#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "dotenv": "^8.2.0",
+    "axios": "^0.21.1",
+    "dotenv": "^9.0.1",
     "express": "^4.17.1",
-    "express-validator": "^6.10.1",
-    "mongoose": "^5.12.6"
+    "mongoose": "^5.12.7"
   },
   "devDependencies": {
+    "concurrently": "^6.1.0",
     "nodemon": "^2.0.7"
   }
 }
