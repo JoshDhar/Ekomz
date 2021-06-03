@@ -112,7 +112,7 @@ export const payOrder =
       );
 
       dispatch({
-        type: USER_ORDER_LIST_SUCCESS,
+        type: ORDER_PAY_SUCCESS,
         payload: data,
       });
     } catch (error) {
@@ -124,7 +124,7 @@ export const payOrder =
         dispatch(logout());
       }
       dispatch({
-        type: USER_ORDER_LIST_FAIL,
+        type: ORDER_PAY_FAIL,
         payload: message,
       });
     }

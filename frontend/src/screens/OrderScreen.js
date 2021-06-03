@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
@@ -44,6 +44,10 @@ const OrderScreen = ({ match, history }) => {
   }
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    }
+
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
       const script = document.createElement("script");
@@ -66,7 +70,7 @@ const OrderScreen = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, orderId, successPay, order]);
+  }, [dispatch, userInfo, history, orderId, successPay, order]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
@@ -187,7 +191,7 @@ const OrderScreen = ({ match, history }) => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                {error && <Message variant="danger">{error}</Message>}
+                {errorPay && <Message variant="danger">{error}</Message>}
               </ListGroup.Item>
               {!order.isPaid && (
                 <ListGroup.Item>
